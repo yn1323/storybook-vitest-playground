@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook",
-    "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"pnpm build-storybook --quiet && pnpm dlx http-server storybook-static --port 6006 --silent\" \"wait-on tcp:6006 && pnpm test-storybook\"",
+    "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"pnpm build-storybook --quiet && http-server storybook-static --port 6006 --silent\" \"wait-on tcp:6006 && pnpm test-storybook\"",
     "test": "vitest"
   },
   "dependencies": {
@@ -36,15 +36,18 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-storybook": "^0.8.0",
+    "http-server": "^14.1.1",
     "jsdom": "^24.0.0",
     "storybook": "^8.0.6",
     "storycap-testrun": "^0.0.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vitest": "^1.4.0"
+    "vitest": "^1.4.0",
+    "wait-on": "^7.2.0"
   }
 }

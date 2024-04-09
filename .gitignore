@@ -26,3 +26,5 @@ dist-ssr
 *storybook.log
 
 __screenshots__
+
+storybook-static
