@@ -12,5 +12,7 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: ./.github/actions/setup
+      - name: Install Playwright
+        run: pnpm dlx playwright install --with-deps
       - name: Test_Capture
         run: pnpm test-storybook:ci
