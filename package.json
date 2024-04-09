@@ -12,7 +12,8 @@
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook",
     "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"pnpm build-storybook --quiet && http-server storybook-static --port 6006 --silent\" \"wait-on tcp:6006 && pnpm test-storybook\"",
-    "test": "vitest"
+    "test": "vitest",
+    "vrt": "reg-suit run"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -43,6 +44,10 @@
     "eslint-plugin-storybook": "^0.8.0",
     "http-server": "^14.1.1",
     "jsdom": "^24.0.0",
+    "reg-keygen-git-hash-plugin": "^0.14.3",
+    "reg-notify-github-plugin": "^0.14.3",
+    "reg-publish-s3-plugin": "^0.14.3",
+    "reg-suit": "^0.14.3",
     "storybook": "^8.0.6",
     "storycap-testrun": "^0.0.2",
     "typescript": "^5.2.2",

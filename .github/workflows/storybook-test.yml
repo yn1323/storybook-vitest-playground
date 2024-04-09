@@ -12,7 +12,16 @@ jobs:
           fetch-depth: 0
       - name: Setup
         uses: ./.github/actions/setup
+      # - name: workaround for detached HEAD
+      #   if: ${{ github.event_name == 'pull_request' }}
+      #   run: |
+      #     git checkout ${GITHUB_HEAD_REF#refs/heads/} || git checkout -b ${GITHUB_HEAD_REF#refs/heads/} && git pull
       - name: Install Playwright
         run: pnpm dlx playwright install --with-deps
       - name: Test_Capture
         run: pnpm test-storybook:ci
+      - name: VRT
+        run: pnpm vrt
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
