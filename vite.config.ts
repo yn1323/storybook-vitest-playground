@@ -1,12 +1,13 @@
 /// <reference types="vitest" />
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   test: {
-    include: ['src/**/*.test.tsx'],
-    environment: 'jsdom',
-},
-})
+    include: ["src/**/*.test.tsx"],
+    environment: "jsdom",
+    setupFiles: ["./setupTests.js"],
+  },
+});
