@@ -1,0 +1,16 @@
+name: storybook test_vrt
+
+on:
+  - push
+
+jobs:
+  test_vrt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test_Capture
+        run: pnpm test-storybook:ci
