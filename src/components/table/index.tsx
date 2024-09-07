@@ -1,12 +1,13 @@
 import {
+	type Row,
 	createColumnHelper,
 	flexRender,
 	getCoreRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
+import { useTableContext } from "./context";
 import type { createData } from "./data";
-import type { useTableHook } from "./hook";
 
 type Column = {
 	[key: string]: string;
@@ -14,9 +15,21 @@ type Column = {
 
 type Props = {
 	rowData: ReturnType<typeof createData>;
-} & ReturnType<typeof useTableHook>;
+};
 
-export const Table = ({ rowData, clickedRow, setClickedRow }: Props) => {
+function useMeasure() {
+	const timer = useRef(new Date());
+
+	useEffect(() => {
+		console.log("mogemoe");
+	}, []);
+}
+
+export const Table = memo(({ rowData }: Props) => {
+	useMeasure();
+
+	const { clickedRow, setClickedRow } = useTableContext();
+
 	const columns = useMemo(
 		() => createColumns(rowData.columns),
 		[rowData.columns],
@@ -52,28 +65,57 @@ export const Table = ({ rowData, clickedRow, setClickedRow }: Props) => {
 			</thead>
 			<tbody>
 				{table.getRowModel().rows.map((row, index) => (
-					// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-					<tr
-						key={row.original.id}
-						style={{
-							background: index === clickedRow ? "red" : undefined,
-							cursor: "pointer",
-						}}
-						onClick={() => {
-							setClickedRow(index);
-						}}
-					>
-						{row.getVisibleCells().map((cell) => (
-							<td key={cell.id}>
-								{flexRender(cell.column.columnDef.cell, cell.getContext())}
-							</td>
-						))}
-					</tr>
+					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+					<TableRow
+						key={index}
+						row={row}
+						index={index}
+						clickedRow={clickedRow}
+						setClickedRow={setClickedRow}
+					/>
 				))}
 			</tbody>
 		</table>
 	);
+});
+
+type TableRowProps = {
+	row: Row<Column>;
+	index: number;
+	clickedRow: number;
+	setClickedRow: (index: number) => void;
 };
+
+const TableRow = memo(
+	({ row, index, clickedRow, setClickedRow }: TableRowProps) => {
+		return (
+			// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+			<tr
+				key={row.original.id}
+				style={{
+					background: index === clickedRow ? "red" : undefined,
+					cursor: "pointer",
+				}}
+				onClick={() => {
+					setClickedRow(index);
+				}}
+			>
+				{row.getVisibleCells().map((cell) => (
+					<td key={cell.id}>
+						{flexRender(cell.column.columnDef.cell, cell.getContext())}
+					</td>
+				))}
+			</tr>
+		);
+	},
+	(prevProps, nextProps) => {
+		// 行がクリックされたか、データが変わっていない場合は再レンダリングしない
+		return (
+			prevProps.clickedRow === nextProps.clickedRow &&
+			prevProps.row === nextProps.row
+		);
+	},
+);
 
 function createColumns(columns: Props["rowData"]["columns"]) {
 	const columnHelper = createColumnHelper<Column>();

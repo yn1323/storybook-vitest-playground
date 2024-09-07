@@ -1,12 +1,15 @@
 import "./App.css";
 import { Table } from "./components/table";
-import { useTableHook } from "./components/table/hook";
+import { TableProvider } from "./components/table/context";
+import { createData } from "./components/table/data";
 
 function App() {
-	const tableHook = useTableHook();
+	// const tableHook = useTableHook();
 	return (
 		<div>
-			<Table rowData={tableHook.data} {...tableHook} />
+			<TableProvider>
+				<Table rowData={createData()} />
+			</TableProvider>
 		</div>
 	);
 }
