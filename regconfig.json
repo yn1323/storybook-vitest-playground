@@ -2,7 +2,7 @@
   "core": {
     "workingDir": ".reg",
     "actualDir": "__screenshots__",
-    "thresholdRate": 0.05,
+    "thresholdRate": 0.001,
     "ximgdiff": {
       "invocationType": "client"
     }
@@ -11,7 +11,8 @@
     "reg-keygen-git-hash-plugin": true,
     "reg-notify-github-plugin": {
       "prComment": true,
-      "prCommentBehavior": "default",
+      "prCommentBehavior": "new",
+      "shortDescription": true,
       "clientId": "M7cwMTI2MDO30C8uyS+qTMrPz9YtyyxJLS7RLchJrEwvyi/NS9E3MrYwNDKyNNevzDM0NjIGAA=="
     },
     "reg-publish-s3-plugin": {
