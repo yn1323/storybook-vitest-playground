@@ -1,26 +1,28 @@
-name: UX目安箱📬
-description: 不具合ではないけど気になるUIを投稿しよう！
+name: UX目安箱 📬
+description: 気になったUXを投稿しよう！
 body:
   - type: textarea
     id: capture
     attributes:
       label: スクリーンショット or 動画
       description: まずは気になるUIのスクリーンショット or 動画をはろう！
-      placeholder: スクショショートカット（Win：win + shift + S, Mac：shift + command + 4）
+      placeholder: ショートカット（Win：win + shift + S, Mac：shift + command + 4）
     validations:
       required: true
   - type: textarea
     id: explanation
     attributes:
       label: 解説
-      description: 気になったUXについておしえてください！
+      placeholder: 気になったことをおしえてください！
+    validations:
+      required: true
   - type: textarea
     id: do
     attributes:
       label: 改善案
-      description: どうすれば良くなるとおもいますか？（ざっくりでOK）
+      placeholder: どうすれば良くなるとおもいますか？（ざっくりでOK）
   - type: textarea
     id: supplement
     attributes:
       label: 補足
-      description: その他語りたいことがあればどうぞ！
+      placeholder: その他語りたいことがあればどうぞ！
