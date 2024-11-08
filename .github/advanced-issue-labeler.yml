@@ -1,0 +1,27 @@
+policy:
+  - template: ["ux_suggestion.yml"]
+    section:
+      - id: ["operating-system"]
+        block-list: []
+        label:
+          - name: os:windows
+            keys: ["Windows"]
+          - name: os:macos
+            keys: ["macOS"]
+          - name: os:linux
+            keys: ["Linux"]
+          - name: os:other
+            keys: ["Other"]
+      - id: ["browser"]
+        block-list: []
+        label:
+          - name: browser:chrome
+            keys: ["Chrome"]
+          - name: browser:firefox
+            keys: ["Firefox"]
+          - name: browser:safari
+            keys: ["Safari"]
+          - name: browser:edge
+            keys: ["Edge"]
+          - name: browser:other
+            keys: ["Other"]
